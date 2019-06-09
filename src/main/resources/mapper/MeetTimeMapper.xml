@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.javasoso.meeting.mapper.MeetTimeMapper" >
+  <resultMap id="BaseResultMap" type="cn.javasoso.meeting.model.MeetTime" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="employee_id" property="employeeId" jdbcType="INTEGER" />
+    <result column="meet_room_id" property="meetRoomId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="BIT" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, employee_id, meet_room_id, status, state, start_time, end_time, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from meet_time
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from meet_time
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.javasoso.meeting.model.MeetTime" >
+    insert into meet_time (id, employee_id, meet_room_id, 
+      status, state, start_time, 
+      end_time, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{employeeId,jdbcType=INTEGER}, #{meetRoomId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{state,jdbcType=BIT}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.javasoso.meeting.model.MeetTime" >
+    insert into meet_time
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="meetRoomId != null" >
+        meet_room_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="meetRoomId != null" >
+        #{meetRoomId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=BIT},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.javasoso.meeting.model.MeetTime" >
+    update meet_time
+    <set >
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="meetRoomId != null" >
+        meet_room_id = #{meetRoomId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=BIT},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.javasoso.meeting.model.MeetTime" >
+    update meet_time
+    set employee_id = #{employeeId,jdbcType=INTEGER},
+      meet_room_id = #{meetRoomId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      state = #{state,jdbcType=BIT},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectBy" resultMap="BaseResultMap" parameterType="cn.javasoso.meeting.model.MeetTime" >
+        select
+        <include refid="Base_Column_List" />
+        from meet_time
+        <where>
+            <if test="employeeId != null" >
+                employee_id = #{employeeId,jdbcType=INTEGER}
+            </if>
+            <if test="meetRoomId != null" >
+              and  meet_room_id = #{meetRoomId,jdbcType=INTEGER}
+            </if>
+            <if test="status != null" >
+               and status = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="state != null" >
+              and  state = #{state,jdbcType=BIT}
+            </if>
+            <if test="startTime != null" >
+               and start_time = #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null" >
+              and  end_time = #{endTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createTime != null" >
+               and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null" >
+              and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+    <select id="selectAllMeetName" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from meet_time
+    </select>
+    <update id="updateStatus" parameterType="cn.javasoso.meeting.model.MeetTime">
+        update meet_time
+        set status = 0
+        <where>
+            <if test="employeeId != null" >
+                employee_id = #{employeeId,jdbcType=INTEGER}
+            </if>
+            <if test="meetRoomId != null" >
+               and meet_room_id = #{meetRoomId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </update>
+</mapper>
